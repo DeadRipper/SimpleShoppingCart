@@ -25,6 +25,21 @@ namespace SimpleShoppingCart.Controllers
             return View(await _context.ShopModel.ToListAsync());
         }
 
+        public async Task<IActionResult> Suppliers()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> About()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Contact()
+        {
+            return View();
+        }
+
         // GET: ShopCart/Details/5
         public async Task<IActionResult> Details(int? id)
         {
