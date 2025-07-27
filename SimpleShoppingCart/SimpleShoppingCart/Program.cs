@@ -10,7 +10,6 @@ namespace SimpleShoppingCart
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbContext<SimpleShoppingCartContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("SimpleShoppingCartContext") ?? throw new InvalidOperationException("Connection string 'SimpleShoppingCartContext' not found.")));
-
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 

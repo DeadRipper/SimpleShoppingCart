@@ -14,6 +14,6 @@ namespace SimpleShoppingCart.Data
         {
         }
 
-        public DbSet<SimpleShoppingCart.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<SimpleShoppingCart.Models.ShopModel> ShopModel { get; set; } = default!;
     }
 }

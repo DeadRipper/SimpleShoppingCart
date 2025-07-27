@@ -22,7 +22,7 @@ namespace SimpleShoppingCart.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SimpleShoppingCart.Models.Movie", b =>
+            modelBuilder.Entity("SimpleShoppingCart.Models.ShopModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace SimpleShoppingCart.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.ToTable("ShopModel");
                 });
 #pragma warning restore 612, 618
         }

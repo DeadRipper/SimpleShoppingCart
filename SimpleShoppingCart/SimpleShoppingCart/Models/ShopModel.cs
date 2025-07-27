@@ -2,7 +2,7 @@
 
 namespace SimpleShoppingCart.Models
 {
-    public class Movie
+    public class ShopModel
     {
         public int Id { get; set; }
         public string? Title { get; set; }

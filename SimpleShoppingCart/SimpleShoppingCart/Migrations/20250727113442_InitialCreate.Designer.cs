@@ -12,7 +12,7 @@ using SimpleShoppingCart.Data;
 namespace SimpleShoppingCart.Migrations
 {
     [DbContext(typeof(SimpleShoppingCartContext))]
-    [Migration("20250727102423_InitialCreate")]
+    [Migration("20250727113442_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace SimpleShoppingCart.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SimpleShoppingCart.Models.Movie", b =>
+            modelBuilder.Entity("SimpleShoppingCart.Models.ShopModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -47,7 +47,7 @@ namespace SimpleShoppingCart.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.ToTable("ShopModel");
                 });
 #pragma warning restore 612, 618
         }
