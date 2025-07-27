@@ -40,6 +40,11 @@ namespace SimpleShoppingCart.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Main()
+        {
+            return View();
+        }
+
         // GET: ShopCart/Details/5
         public async Task<IActionResult> Details(int? id)
         {
