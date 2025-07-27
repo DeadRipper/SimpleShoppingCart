@@ -27,17 +27,17 @@ namespace SimpleShoppingCart.Controllers
 
         public async Task<IActionResult> Suppliers()
         {
-            return View();
+            return View("UIElements/Suppliers");
         }
 
         public async Task<IActionResult> About()
         {
-            return View();
+            return View("UIElements/About");
         }
 
         public async Task<IActionResult> Contact()
         {
-            return View();
+            return View("UIElements/Contact");
         }
 
         public async Task<IActionResult> Main()
