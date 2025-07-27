@@ -23,6 +23,17 @@ namespace SimpleShoppingCart.Controllers
             return View();
         }
 
+        public IActionResult Movies()
+        {
+            return View();
+        }
+
+        public IActionResult Create()
+        {
+            ViewData["Title"] = "Create Item";
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
