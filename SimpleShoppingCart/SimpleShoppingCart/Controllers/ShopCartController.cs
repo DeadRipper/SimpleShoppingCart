@@ -42,6 +42,11 @@ namespace SimpleShoppingCart.Controllers
 
         public async Task<IActionResult> Main()
         {
+            return View("UIElements/Main");
+        }
+
+        public async Task<IActionResult> Error()
+        {
             return View();
         }
 

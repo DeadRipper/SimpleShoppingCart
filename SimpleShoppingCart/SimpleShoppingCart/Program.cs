@@ -18,7 +18,7 @@ namespace SimpleShoppingCart
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/ShopCart/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -31,7 +31,7 @@ namespace SimpleShoppingCart
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=ShopCart}/{action=Main}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
