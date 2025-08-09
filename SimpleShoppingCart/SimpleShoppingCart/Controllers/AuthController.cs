@@ -18,16 +18,46 @@ using System.Threading.Tasks;
 
 namespace SimpleShoppingCart.Controllers
 {
-    public class AuthController(SimpleShoppingCartContext _context, ILogger<AuthController> _logger, IValidate _validate, IDBWorker _dBWorker) : Controller
+    public class AuthController(ILogger<AuthController> _logger, IValidate _validate, IDBWorker _dBWorker) : Controller
     {        
         public async Task<IActionResult> SignUp()
         {
             return View("LoginPageViews/Login");
         }
 
-        public async Task<IActionResult> SignIn()
+        public async Task<IActionResult> SignInView()
         {
-            return RedirectToAction("Main", "ShopCart");
+            return View("SignInPageViews/SignIn");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignIn(SignInModel signIn)
+        {
+            if (await _dBWorker.CheckUserContainsInDB(signIn.Login, signIn.Password))
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, signIn.Login),
+                    new Claim(ClaimTypes.Name, signIn.Login),
+                };
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8)
+                });
+
+                return RedirectToAction("Me");
+            }
+
+            ModelState.AddModelError(string.Empty, "Not registered");    
+            return View("SignInPageViews/SignIn");
         }
 
         [HttpPost]
@@ -52,7 +82,7 @@ namespace SimpleShoppingCart.Controllers
                 return View("LoginPageViews/Login");
             }            
 
-            if(await _dBWorker.CheckUserContainsInDB(loginModel.Login, loginModel.Password))
+            if(!await _dBWorker.CheckUserContainsInDB(loginModel.Login, loginModel.Password))
             {
                 _dBWorker.SaveDataInDB(loginModel);
             }

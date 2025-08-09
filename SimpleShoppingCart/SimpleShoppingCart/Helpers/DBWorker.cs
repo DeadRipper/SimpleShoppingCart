@@ -25,7 +25,7 @@ namespace SimpleShoppingCart.Helpers
         {
             if (_context.LoginModel.Where(x => x.Login == login)?.FirstOrDefault() != null || _context.LoginModel.Where(x => x.Password == password)?.FirstOrDefault() != null)
             {
-                _logger.LogWarning("already registered");
+                _logger.LogWarning("user registered");
                 return true;
             }
 
