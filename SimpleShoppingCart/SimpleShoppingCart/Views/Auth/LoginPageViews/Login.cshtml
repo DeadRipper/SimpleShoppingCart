@@ -1,0 +1,25 @@
+﻿@model SimpleShoppingCart.Models.RegistrationUserModel
+<h2>LoginPage</h2>
+<form asp-action="SaveLogin" asp-controller="Auth" method="post" enctype="application/json">
+    <label for="Login">Enter Login</label>
+    <br>
+    <input type="Login" asp-for="Login" value="@ViewBag.Login" /><span asp-validation-for="Login" class="error"></span>
+    <br>
+
+    <label for="Email">Enter Email</label>
+    <br>
+    <input id="Email" name="Email" type="text" />
+    <br>
+
+    <label for="Password" type="password">Enter Password</label>
+    <br>
+    <input type="password" asp-for="Password" value="@ViewBag.Password" /><span asp-validation-for="Password" class="error"></span>
+    <br>
+    
+    <label for="ConfirmPassword" type="password">Confirm Password</label>
+    <br>
+    <input type="password" asp-for="ConfirmPassword" value="@ViewBag.ConfirmPassword" /><span asp-validation-for="ConfirmPassword" class="error"></span>
+    <br>
+        
+    <button type="submit">Sign Up</button>
+</form>

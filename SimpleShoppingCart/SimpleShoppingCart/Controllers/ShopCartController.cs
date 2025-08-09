@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SimpleShoppingCart.Data;
-using SimpleShoppingCart.Models;
+using SimpleShoppingCart.Models.DBModels;
 
 namespace SimpleShoppingCart.Controllers
 {

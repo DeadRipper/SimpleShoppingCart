@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using SimpleShoppingCart.Data;
+using SimpleShoppingCart.Helpers;
+using SimpleShoppingCart.Helpers.InterfacesHelpers;
 namespace SimpleShoppingCart
 {
     public class Program
@@ -13,7 +17,20 @@ namespace SimpleShoppingCart
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+            builder.Services.AddTransient<IValidate, Validate>();
+            builder.Services.AddScoped<IDBWorker, DBWorker>();
+
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Auth/LoginPageViews/Login";
+                options.LogoutPath = "/Auth/Logout";
+                options.AccessDeniedPath = "/Auth/Denied";
+                options.ExpireTimeSpan = TimeSpan.FromHours(8);
+                options.SlidingExpiration = true;
+            });
+
+            var app = builder.Build();            
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

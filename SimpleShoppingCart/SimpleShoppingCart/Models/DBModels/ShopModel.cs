@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SimpleShoppingCart.Models
+namespace SimpleShoppingCart.Models.DBModels
 {
     public class ShopModel
     {

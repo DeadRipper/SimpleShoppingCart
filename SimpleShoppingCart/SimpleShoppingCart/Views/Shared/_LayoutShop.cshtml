@@ -31,6 +31,30 @@
                         </li>
                     </ul>
                 </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between margin-left:1250px">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            @switch (User?.Identity?.IsAuthenticated)
+                            {
+                                case true:
+                                    <span class="user">Signed in as @User.Identity!.Name</span>
+                                    <form asp-controller="Auth" asp-action="Logout" method="post" class="logout-form">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit">Log out</button>
+                                    </form>
+                                    break;
+                                case false:
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="SignUp">Sign Up</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="SignIn">Sign In</a>
+                                    </li>
+                                    break;
+                            }
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>

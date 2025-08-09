@@ -43,3 +43,8 @@ caption {
     font-size: 20px;
     color: blue;
 }
+
+.error {
+    color: red;
+    font-weight: bold;
+}
