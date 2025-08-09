@@ -42,10 +42,14 @@ public class Startup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         // Configure the HTTP request pipeline.
-        if (!env.IsDevelopment())
+        if (env.IsDevelopment())
         {
-            app.UseExceptionHandler("/ShopCart/Error");
-            // HSTS configuration for production
+            app.UseDeveloperExceptionPage();
+            app.UseHsts();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
         }
 
