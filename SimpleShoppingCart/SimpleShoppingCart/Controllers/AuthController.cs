@@ -83,24 +83,29 @@ namespace SimpleShoppingCart.Controllers
             if(!await _dBWorker.CheckUserContainsInDB(loginModel.Login, loginModel.Password))
             {
                 _dBWorker.SaveDataInDB(loginModel);
+
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, loginModel.Login),
+                    new Claim(ClaimTypes.Name, loginModel.Login),
+                };
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
+                new AuthenticationProperties
+                {
+                    IsPersistent = true,
+                    ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8)
+                });
+
+                return RedirectToAction("Me");
             }
-
-            var claims = new List<Claim>
+            else
             {
-                new Claim(ClaimTypes.NameIdentifier, loginModel.Login),
-                new Claim(ClaimTypes.Name, loginModel.Login),
-            };
-            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var principal = new ClaimsPrincipal(identity);
-
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
-            new AuthenticationProperties
-            {
-                IsPersistent = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8)
-            });
-
-            return RedirectToAction("Me");
+                ModelState.AddModelError(string.Empty, "Not registered");
+                return View("LoginPageViews/Login");
+            }
         }
 
         [Authorize]

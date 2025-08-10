@@ -21,5 +21,11 @@
     <input type="password" asp-for="ConfirmPassword" value="@ViewBag.ConfirmPassword" /><span asp-validation-for="ConfirmPassword" class="error"></span>
     <br>
     <br>
-    <button type="submit">Sign Up</button>
+    @if (ViewData.ModelState?.Values.Any(v => v.Errors?.Any() == true) == true)
+    {
+        <script type="text/javascript">
+            alert("Login unavailable");
+        </script>
+    }
+    <button type="submit" href="@Url.Action("SignInView", "Auth")">Sign Up</button>
 </form>
