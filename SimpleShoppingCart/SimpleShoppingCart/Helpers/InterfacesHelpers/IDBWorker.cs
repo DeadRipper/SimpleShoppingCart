@@ -11,5 +11,6 @@ namespace SimpleShoppingCart.Helpers.InterfacesHelpers
         Task<bool> CheckAdminAuth(string login, string password);
         Task<List<LoginModel>> UsersInDb();
         Task<List<BoughtedProductsModel>> BoughtedProductsInDb();
+        Task<List<ShopItems>> ListOfAvailableProducts();
     }
 }

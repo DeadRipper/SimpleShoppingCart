@@ -5,12 +5,16 @@ namespace SimpleShoppingCart.Models.DBModels
 {
     public class ShopModel
     {
-        public int Id { get; set; }
-        public string? Title { get; set; }
-        [DataType(DataType.Date)]
-        public DateTime ReleaseDate { get; set; }
-        public string? Genre { get; set; }
-        [Column(TypeName = "decimal(14,2)")]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id")]
+        public int Id { get; set; }        
+        public int FirmBadge { get; set; }
+        public string? ProductTitle { get; set; }
+        public string? ProductSubTitle { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
+        [Column(TypeName = "decimal(18, 2)")]
+        public decimal ProductWeight { get; set; }
     }
 }

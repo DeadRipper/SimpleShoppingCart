@@ -1,4 +1,5 @@
-﻿using SimpleShoppingCart.Controllers;
+﻿using Microsoft.EntityFrameworkCore;
+using SimpleShoppingCart.Controllers;
 using SimpleShoppingCart.Data;
 using SimpleShoppingCart.Helpers.InterfacesHelpers;
 using SimpleShoppingCart.Models;
@@ -53,6 +54,30 @@ namespace SimpleShoppingCart.Helpers
         public async Task<List<BoughtedProductsModel>> BoughtedProductsInDb()
         {
             return _context.BoughtedProductsModel.ToList();
+        }
+
+        public async Task<List<ShopItems>> ListOfAvailableProducts()
+        {
+            var shopItems = await _context.ShopModel.ToListAsync(); // materialize first
+            var products = new List<ShopItems>();
+
+            foreach (var item in shopItems)
+            {
+                var firmBadge = await _context.VendorCompaniesModel
+                    .Where(xx => xx.Id == item.Id)
+                    .Select(xxx => xxx.CompanyName)
+                    .FirstOrDefaultAsync();
+                products.Add(new ShopItems()
+                {
+                    Id = item.Id,
+                    FirmBadge = firmBadge,
+                    Price = item.Price,
+                    ProductSubTitle = item.ProductSubTitle,
+                    ProductTitle = item.ProductTitle,
+                    ProductWeight = item.ProductWeight
+                });
+            }
+            return products;
         }
     }
 }
