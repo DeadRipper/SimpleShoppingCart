@@ -17,5 +17,6 @@ namespace SimpleShoppingCart.Data
         public DbSet<ShopModel> ShopModel { get; set; } = default!;
         public DbSet<LoginModel> LoginModel { get; set; } = default!;
         public DbSet<BoughtedProductsModel> BoughtedProductsModel { get; set; } = default!;
+        public DbSet<VendorCompaniesModel> VendorCompaniesModel { get; set; } = default!;
     }
 }

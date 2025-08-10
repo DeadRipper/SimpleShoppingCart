@@ -36,6 +36,7 @@ namespace SimpleShoppingCart.Controllers
 
         public async Task<IActionResult> Main()
         {
+            ViewBag.Products = _dBWorker.ListOfAvailableProducts().GetAwaiter().GetResult();
             return View("UIElements/Main");
         }
 
