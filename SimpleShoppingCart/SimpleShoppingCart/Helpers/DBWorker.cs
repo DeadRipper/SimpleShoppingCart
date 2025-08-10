@@ -31,5 +31,28 @@ namespace SimpleShoppingCart.Helpers
 
             return false;
         }
+
+        public async Task<bool> CheckAdminAuth(string login, string password)
+        {
+            var adminAuth = _context.LoginModel.Where(x => x.Login == "admin").FirstOrDefault();
+
+            if (adminAuth.Password == password)
+            {
+                _logger.LogWarning("admin detected");
+                return true;
+            }
+
+            return false;
+        }
+
+        public async Task<List<LoginModel>> UsersInDb()
+        {
+            return _context.LoginModel.ToList();
+        }
+
+        public async Task<List<BoughtedProductsModel>> BoughtedProductsInDb()
+        {
+            return _context.BoughtedProductsModel.ToList();
+        }
     }
 }

@@ -51,6 +51,10 @@ namespace SimpleShoppingCart.Controllers
                     ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8)
                 });
 
+                if (await _dBWorker.CheckAdminAuth(signIn.Login, signIn.Password))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
                 return RedirectToAction("Me");
             }
 

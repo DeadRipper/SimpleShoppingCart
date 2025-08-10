@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleShoppingCart.Data;
 
@@ -11,9 +12,11 @@ using SimpleShoppingCart.Data;
 namespace SimpleShoppingCart.Migrations
 {
     [DbContext(typeof(SimpleShoppingCartContext))]
-    partial class SimpleShoppingCartContextModelSnapshot : ModelSnapshot
+    [Migration("20250810090234_AddBoughtedProductsTable")]
+    partial class AddBoughtedProductsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,37 +24,6 @@ namespace SimpleShoppingCart.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("SimpleShoppingCart.Models.DBModels.BoughtedProductsModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateDelivered")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateOrdered")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("ProductPrice")
-                        .HasColumnType("decimal(18, 8)");
-
-                    b.Property<string>("SendAdress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("BoughtedProductsModel");
-                });
 
             modelBuilder.Entity("SimpleShoppingCart.Models.DBModels.LoginModel", b =>
                 {

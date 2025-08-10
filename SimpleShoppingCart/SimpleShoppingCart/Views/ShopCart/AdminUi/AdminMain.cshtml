@@ -1,0 +1,42 @@
+﻿@using SimpleShoppingCart.Models.DBModels
+<div class="width: 100%; overflow:auo;">
+    <div class="split left">
+        <h1>
+            Added users
+        </h1>
+        <ul>
+            @foreach (var item in (List<LoginModel>)ViewBag.Users)
+            {
+                <li>@item.Login</li>
+            }
+        </ul>
+    </div>
+    <div class="split right">
+        <h1>
+            Bought products
+        </h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ProductName</th>
+                    <th>ProductPrice</th>
+                    <th>Send Adress</th>
+                    <th>Date Ordered</th>
+                    <th>Date Delivered</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    @foreach (var item in (List<BoughtedProductsModel>)ViewBag.BoughtedProducts)
+                    {
+                        <td>@item.ProductName</td>
+                        <td>@item.ProductPrice</td>
+                        <td>@item.SendAdress</td>
+                        <td>@item.DateOrdered</td>
+                        <td>@item.DateDelivered</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

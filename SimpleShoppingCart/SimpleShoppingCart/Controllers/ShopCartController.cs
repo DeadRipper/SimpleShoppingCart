@@ -6,19 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SimpleShoppingCart.Data;
+using SimpleShoppingCart.Helpers.InterfacesHelpers;
 using SimpleShoppingCart.Models.DBModels;
 
 namespace SimpleShoppingCart.Controllers
 {
-    public class ShopCartController : Controller
+    public class ShopCartController(SimpleShoppingCartContext _context, IDBWorker _dBWorker) : Controller
     {
-        private readonly SimpleShoppingCartContext _context;
-
-        public ShopCartController(SimpleShoppingCartContext context)
-        {
-            _context = context;
-        }
-
         // GET: ShopCart
         public async Task<IActionResult> Index()
         {
@@ -43,6 +37,13 @@ namespace SimpleShoppingCart.Controllers
         public async Task<IActionResult> Main()
         {
             return View("UIElements/Main");
+        }
+
+        public async Task<IActionResult> AdminMain()
+        {
+            ViewBag.Users = _dBWorker.UsersInDb().Result;
+            ViewBag.BoughtedProducts = _dBWorker.BoughtedProductsInDb().Result;
+            return View("AdminUi/AdminMain");
         }
 
         public async Task<IActionResult> Error()
