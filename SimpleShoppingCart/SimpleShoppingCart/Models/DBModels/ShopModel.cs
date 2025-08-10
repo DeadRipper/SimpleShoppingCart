@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SimpleShoppingCart.Models
+namespace SimpleShoppingCart.Models.DBModels
 {
     public class ShopModel
     {
@@ -9,6 +10,7 @@ namespace SimpleShoppingCart.Models
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public string? Genre { get; set; }
+        [Column(TypeName = "decimal(14,2)")]
         public decimal Price { get; set; }
     }
 }

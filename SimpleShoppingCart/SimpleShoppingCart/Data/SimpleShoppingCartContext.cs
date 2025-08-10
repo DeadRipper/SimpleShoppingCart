@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using SimpleShoppingCart.Models;
+using SimpleShoppingCart.Models.DBModels;
 
 namespace SimpleShoppingCart.Data
 {
@@ -14,6 +14,7 @@ namespace SimpleShoppingCart.Data
         {
         }
 
-        public DbSet<SimpleShoppingCart.Models.ShopModel> ShopModel { get; set; } = default!;
+        public DbSet<ShopModel> ShopModel { get; set; } = default!;
+        public DbSet<LoginModel> LoginModel { get; set; } = default!;
     }
 }

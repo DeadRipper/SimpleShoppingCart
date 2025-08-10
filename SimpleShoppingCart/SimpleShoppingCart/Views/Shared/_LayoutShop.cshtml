@@ -32,6 +32,30 @@
                     </ul>
                 </div>
             </div>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    @switch (User?.Identity?.IsAuthenticated)
+                    {
+                        case true:
+                            <li class="nav-item">
+                                <span class="user">Signed in as @User.Identity!.Name</span>
+                                <form asp-controller="Auth" asp-action="Logout" method="post" class="logout-form">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit">Log out</button>
+                                </form>
+                            </li>
+                            break;
+                        case false:
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="SignUp">Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Auth" asp-action="SignInView">Sign In</a>
+                            </li>
+                            break;
+                    }
+                </ul>
+            </div>
         </nav>
     </header>
     <div class="container">
@@ -39,10 +63,9 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2025 - SimpleShoppingCart - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - SimpleShoppingCart - <a asp-area="" asp-controller="ShopCart" asp-action="About">About</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

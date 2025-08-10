@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SimpleShoppingCart.Data;
 
@@ -11,9 +12,11 @@ using SimpleShoppingCart.Data;
 namespace SimpleShoppingCart.Migrations
 {
     [DbContext(typeof(SimpleShoppingCartContext))]
-    partial class SimpleShoppingCartContextModelSnapshot : ModelSnapshot
+    [Migration("20250809081714_ReMakeConnectionString")]
+    partial class ReMakeConnectionString
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,34 +25,7 @@ namespace SimpleShoppingCart.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("SimpleShoppingCart.Models.DBModels.LoginModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("LoginModel");
-                });
-
-            modelBuilder.Entity("SimpleShoppingCart.Models.DBModels.ShopModel", b =>
+            modelBuilder.Entity("SimpleShoppingCart.Models.ShopModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
